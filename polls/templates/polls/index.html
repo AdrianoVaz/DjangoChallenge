@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Django Challenge</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'polls/main.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/">View images</a>
+            <a href="/upload">Upload a file</a>
+        </nav>
+    </header>
+    <div class="container">
+        {% for image in files %}
+        <div class="imgContainer">
+            <img class="img" src="/media/{{image}}"/>
+            <div class="buttonContainer"> 
+                <a href="/image/{{image}}" class="button">
+                    Details
+                </a>
+                <form action="/deleteImage/{{image}}" method="GET">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete Image" name="submit"/>
+                </form> 
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
